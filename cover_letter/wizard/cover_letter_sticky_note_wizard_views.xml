@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="view_cover_letter_sticky_note_wizard_form" model="ir.ui.view">
+            <field name="name">cover.letter.sticky.note.wizard.form</field>
+            <field name="model">cover.letter.sticky.note.wizard</field>
+            <field name="arch" type="xml">
+                <form string="New Sticky Note" class="o_cover_sticky_wizard">
+                <sheet>
+                    <group>
+                    <field name="note_id" invisible="1"/>
+                    <field name="document_id" invisible="1"/>
+                    <field name="name"/>
+                    <field name="summary"/>
+                    <field name="color"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Add Sticky Note"
+                            type="object"
+                            name="action_create_sticky_note"
+                            class="btn-primary"/>
+                    <button string="Discard" class="btn-secondary" special="cancel"/>
+                </footer>
+                </form>
+            </field>
+        </record>
+
+        
+    </data>
+</odoo>

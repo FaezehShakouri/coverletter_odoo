@@ -1,0 +1,1 @@
+from . import cover_letter_sticky_note_wizard

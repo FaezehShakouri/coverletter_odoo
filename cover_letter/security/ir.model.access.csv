@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cover_letter_document,cover.letter.document,model_cover_letter_document,,1,1,1,1
+access_cover_letter_brainstorm_note,cover.letter.brainstorm.note,model_cover_letter_brainstorm_note,,1,1,1,1
+
+access_cover_letter_sticky_note_wizard,cover.letter.sticky.note.wizard,model_cover_letter_sticky_note_wizard,,1,1,1,1
