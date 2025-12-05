@@ -1,0 +1,138 @@
+<odoo>
+  <data>
+
+    <record id="view_cover_letter_document_list" model="ir.ui.view">
+      <field name="name">cover.letter.document.list</field>
+      <field name="model">cover.letter.document</field>
+      <field name="arch" type="xml">
+        <list string="Cover Letter Drafts">
+          <field name="name"/>
+          <field name="target_role"/>
+          <field name="target_company"/>
+          <field name="note_count" string="Ideas"/>
+        </list>
+      </field>
+    </record>
+
+    <record id="view_cover_letter_document_form" model="ir.ui.view">
+      <field name="name">cover.letter.document.form</field>
+      <field name="model">cover.letter.document</field>
+      <field name="arch" type="xml">
+        <form string="Cover Letter Draft">
+          <sheet>
+            <field name="sticky_note_html_preview" nolabel="1" widget="html" class="oe_inline" readonly="1"/>
+            <div class="oe_button_box" name="button_box">
+              <button type="object"
+                      name="action_open_sticky_note_wizard"
+                      class="oe_stat_button"
+                      icon="fa-plus"
+                      help="Quickly capture a new sticky note for this draft.">
+                <div class="o_form_field o_stat_text">New Sticky Note</div>
+              </button>
+            </div>
+            <group>
+              <group>
+                <field name="name"/>
+                <field name="target_role"/>
+              </group>
+              <group>
+                <field name="target_company"/>
+              </group>
+            </group>
+            <notebook>
+                <page string="Letter" name="final_letter">
+                    <field name="final_letter_body" placeholder="Structure your letter here..." options="{'toolbar': 'full'}" widget="html" class="o_cover_letter_editor" nolabel="1"/>
+                </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_cover_letter_document_search" model="ir.ui.view">
+      <field name="name">cover.letter.document.search</field>
+      <field name="model">cover.letter.document</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+        </search>
+      </field>
+    </record>
+
+    <record id="view_cover_letter_note_list" model="ir.ui.view">
+      <field name="name">cover.letter.brainstorm.note.list</field>
+      <field name="model">cover.letter.brainstorm.note</field>
+      <field name="arch" type="xml">
+        <list editable="bottom">
+          <field name="name"/>
+          <field name="summary"/>
+          <field name="color"/>
+          <field name="sequence"/>
+          <field name="document_id"/>
+        </list>
+      </field>
+    </record>
+
+    <record id="view_cover_letter_note_form" model="ir.ui.view">
+      <field name="name">cover.letter.brainstorm.note.form</field>
+      <field name="model">cover.letter.brainstorm.note</field>
+      <field name="arch" type="xml">
+        <form string="Brainstorm Note">
+          <sheet>
+            <group>
+              <group>
+                <field name="name"/>
+                <field name="color"/>
+              </group>
+              <group>
+                <field name="document_id"/>
+                <field name="sequence"/>
+              </group>
+            </group>
+            <field name="summary"/>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_cover_letter_note_kanban" model="ir.ui.view">
+      <field name="name">cover.letter.brainstorm.note.kanban</field>
+      <field name="model">cover.letter.brainstorm.note</field>
+      <field name="arch" type="xml">
+        <kanban default_group_by="document_id" class="o_cover_brainstorm_board">
+          <field name="name"/>
+          <field name="summary"/>
+          <field name="color"/>
+          <templates>
+            <t t-name="card">
+              <div class="o_cover_note"
+                   t-att-style="'background-color: %s; color: #111827; padding: 14px; border-radius: 12px; box-shadow: 0 12px 24px rgba(15,23,42,0.15); min-height: 110px;' % (record.color.raw_value or '#fef3c7')">
+                <div class="o_cover_note_title">
+                  <strong>
+                    <t t-esc="record.name.value"/>
+                  </strong>
+                </div>
+                <div class="o_cover_note_summary" t-if="record.summary.raw_value">
+                  <t t-esc="record.summary.value"/>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record id="action_cover_letter_documents" model="ir.actions.act_window">
+      <field name="name">Cover Letters</field>
+      <field name="res_model">cover.letter.document</field>
+      <field name="view_mode">list,form</field>
+      <field name="search_view_id" ref="cover_letter.view_cover_letter_document_search"/>
+    </record>
+
+    <menuitem id="menu_cover_letter_root"
+              name="Cover Letter Studio"
+              sequence="10"
+              action="cover_letter.action_cover_letter_documents"/>
+
+  </data>
+</odoo>
