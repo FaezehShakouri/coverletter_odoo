@@ -63,3 +63,15 @@ class CoverLetterBrainstormNote(models.Model):
                 "default_color": self.color,
             },
         }
+
+    @api.model
+    def action_reorder_notes(self, note_ids):
+        """Reorder notes based on the provided list of IDs.
+
+        Args:
+            note_ids: List of note IDs in the desired order.
+        """
+        for idx, note_id in enumerate(note_ids):
+            note = self.browse(note_id)
+            if note.exists():
+                note.write({"sequence": idx * 10})

@@ -89,10 +89,15 @@ class CoverLetterDocument(models.Model):
                         padding: 26px 28px 24px;
                         box-shadow: 0 25px 45px rgba(16, 24, 40, 0.25);
                         transform: rotate({rotation}deg);
-                        transition: transform 0.1s ease;
+                        transition: transform 0.15s ease, opacity 0.15s ease;
                         min-height: 170px;
                         overflow: hidden;
-                    ">
+                        cursor: grab;
+                    "
+                    draggable="true"
+                    data-note-id="{note.id}"
+                    data-note-sequence="{note.sequence}"
+                    >
                         <div style="
                             position:absolute;
                             top:-14px;
